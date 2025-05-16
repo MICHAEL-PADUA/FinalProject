@@ -11,11 +11,12 @@ export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+// Check if session or token is available in cookies/localStorage
   const checkSessionCookie = () => {
     const match = document.cookie.match(/access_token=[^;]+/)
     return !!match || localStorage.getItem('authToken') !== null
   }
-
+// Fetch  user’s data if a valid session/token exists
   const fetchUserIfAuthenticated = async () => {
     if (checkSessionCookie()) {
       try {
@@ -38,6 +39,7 @@ export default function AuthProvider({ children }) {
     fetchUserIfAuthenticated()
   }, [])
 
+  // Log in the user and store token
   const logIn = async (credentials) => {
     setLoading(true)
     setError(null)
@@ -45,7 +47,7 @@ export default function AuthProvider({ children }) {
       const loginRes = await axios.post('/login/', credentials)
       localStorage.setItem('authToken', loginRes.data.token)
 
-      // Immediately fetch user info including usertype
+      // Fetch User Info
       const userRes = await axios.get('/protected/', { withCredentials: true })
       setUser({
         username: userRes.data.user,
@@ -61,7 +63,7 @@ export default function AuthProvider({ children }) {
       return false
     }
   }
-
+//Calls logout endpoint and removes token from local storage
   const logOut = async () => {
     setLoading(true)
     try {

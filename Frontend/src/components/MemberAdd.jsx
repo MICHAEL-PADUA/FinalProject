@@ -192,6 +192,17 @@ export default function MemberAdd({ onAdd }) {
         }
     };
     
+    // Added function to handle page refresh when Cancel button is clicked
+    const handleCancel = () => {
+        // First call the onAdd function (likely to close the form)
+        if (onAdd) {
+            onAdd();
+        }
+        
+        // Then refresh the page
+        window.location.reload();
+    };
+    
     return (
         <div className="bg-white p-4 rounded-md shadow-lg w-full max-w-2xl">
             <h2 className="text-lg font-bold mb-2">Add New Member</h2>
@@ -433,7 +444,7 @@ export default function MemberAdd({ onAdd }) {
                     </button>
                     <button
                         type="button"
-                        onClick={onAdd}
+                        onClick={handleCancel} // Changed to use our new function
                         className="bg-gray-300 text-black px-3 py-1 rounded text-sm"
                     >
                         Close

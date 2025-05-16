@@ -20,7 +20,7 @@ export default function LoanAdd({ onLoanAdded, closeAddModal }) {
         const fetchMembers = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/members/');
-                setMembers(response.data); // Assuming the response contains the member list
+                setMembers(response.data); 
             } catch (error) {
                 console.error('Error fetching members:', error);
             }
@@ -36,13 +36,13 @@ export default function LoanAdd({ onLoanAdded, closeAddModal }) {
                 setInterest(5);
                 break;
             case 'salary':
-                setInterest(10);
+                setInterest(6);
                 break;
             case 'emergency':
-                setInterest(15);
+                setInterest(7);
                 break;
             case 'multipurpose':
-                setInterest(20);
+                setInterest(8);
                 break;
             default:
                 setInterest(5);
@@ -62,7 +62,7 @@ export default function LoanAdd({ onLoanAdded, closeAddModal }) {
                 payment_start_date: paymentStartDate,
                 maturity_date: maturityDate,
                 status,
-                member: memberID, // Include member ID in the request
+                member: memberID,
             }, {
                 headers: {
                     'Content-Type': 'application/json',
