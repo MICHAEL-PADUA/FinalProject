@@ -1,9 +1,8 @@
 # ACCCLms 
 Open XAMPP
 Start Apache and MYSQL
-Go to ACCCLMS
-pip install -r requirements.txt
 CD BACKEND
+pip install -r requirements.txt
 CD LOANMANAGEMENTSYSTEM
 python manage.py makemigrations
 python manage.py migrate
